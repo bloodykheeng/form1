@@ -16,6 +16,7 @@ const categories =[
 export default function App() {
     const [firstname,setfirstname] = useState('');
   
+  const [category,setcategory] = useState(categories[0]);
     return (
     <View style={styles.container}>
     <AppTextInput icon="camera" 
@@ -27,7 +28,10 @@ export default function App() {
 
     />
     <MySwitch />
-     <AppPicker items={categories} icon="apps" placeholder="category" />
+     <AppPicker 
+     selecteditem={category}
+     onselecteditem = {(item)=>setcategory(item)}
+     items={categories} icon="apps" placeholder="category" />
       
       <StatusBar style="auto" />
     </View>

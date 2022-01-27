@@ -6,7 +6,7 @@ import colors from "../config/colors";
 import {MaterialCommunityIcons} from "@expo/vector-icons";
 
 
-function AppPicker({icon ,items, placeholder}){
+function AppPicker({icon ,items, placeholder, onselecteditem, selecteditem}){
 	const categories =[
 {label:"furniture",value:1,},
 {label:"clothing",value:2,},
@@ -19,7 +19,7 @@ return(
 	<TouchableWithoutFeedback onPress={()=>setmodalvisible(true)}>
 	<View style={styles.container}>
 	{icon && <MaterialCommunityIcons style={styles.icon} name={icon} size={20}/>}
-	<Text style={styles.text}>{placeholder}</Text>
+	<Text style={styles.text}>{selecteditem ? selecteditem.label : placeholder}</Text>
 	<MaterialCommunityIcons  name="chevron-down" size={20}/>
 	</View>
 	</TouchableWithoutFeedback>
@@ -32,7 +32,10 @@ return(
 	data={categories}
 	
 	renderItem={({item})=>(
-	<TouchableOpacity onPress={(item)=>console.log(item.value)}>
+	<TouchableOpacity onPress={()=>{
+  setmodalvisible(false);
+  onselecteditem(item);
+	}}>
 	<Text>{item.label} </Text>
 	</TouchableOpacity>
 		)
